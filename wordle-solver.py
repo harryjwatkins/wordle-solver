@@ -17,20 +17,25 @@ def count_frequency_letters(word):
         counter[x] = counter.get(x, 0) + 1
     return counter
 
-def get_user_guess(list_of_valid_words):
-    while True:
-        user_input = input("Please type your guess \n")
-        if user_input in list_of_valid_words:
-            break
-        
-        print("Not a valid guess")
-    return user_input
-
 def get_letters_in_word(word):
     result = set()
     for x in word:
         result.add(x)
     return result
+
+def get_user_guess(list_of_valid_words, valid_letters):
+    while True:
+        user_input = input("Please type your guess \n")
+        if user_input in list_of_valid_words:
+            user_letters = get_letters_in_word(user_input)
+            check = all(letter in valid_letters for letter in user_letters)
+            if not check: 
+                print("Your guess has letters that cannot be used")
+                continue
+            break
+        
+        print("Not a valid guess")
+    return user_input
 
 def check_user_guess(user_guess, answer):
     positions = [0] * len(answer)
@@ -42,11 +47,17 @@ def check_user_guess(user_guess, answer):
             positions[index] = 1
     return positions
 
+def remove_grey_letters(letters, user_guess, user_guess_positions):
+    for index in range(len(user_guess_positions)):
+        if user_guess_positions[index] == 0:
+            letters.remove(user_guess)
+
+
 def main():
     words = get_word_list()
     answer = pick_word(words)
-    guess = get_user_guess(words)
-    positions = check_user_guess(guess, answer)
+    valid_letters = ['a','b']
+    guess = get_user_guess(words, valid_letters)
 
 if __name__ == '__main__':
     main()
