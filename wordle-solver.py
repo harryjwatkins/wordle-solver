@@ -50,14 +50,28 @@ def check_user_guess(user_guess, answer):
 def remove_grey_letters(letters, user_guess, user_guess_positions):
     for index in range(len(user_guess_positions)):
         if user_guess_positions[index] == 0:
-            letters.remove(user_guess)
+            letters.remove(user_guess[index])
 
 
 def main():
+    chances = 6
     words = get_word_list()
     answer = pick_word(words)
-    valid_letters = ['a','b']
-    guess = get_user_guess(words, valid_letters)
+    valid_letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+    while chances > 0:
+        print("Valid letters remaining:")
+        print(valid_letters)
+        guess = get_user_guess(words, valid_letters)
+        if guess == answer:
+            break
+        positions = check_user_guess(guess, answer)
+        print(positions)
+        remove_grey_letters(valid_letters, guess, positions)
+    
+    if chances == 0:
+        print("Sorry you failed to guess the word")
+    else:
+        print("You guessed the word!")
 
 if __name__ == '__main__':
     main()
