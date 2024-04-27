@@ -52,6 +52,16 @@ def remove_grey_letters(letters, user_guess, user_guess_positions):
         if user_guess_positions[index] == 0:
             letters.remove(user_guess[index])
 
+def get_correct_positions(user_guess_positions, answer):
+    correct_positions = []
+    for index in range(len(answer)):
+        if user_guess_positions[index] == 2:
+            correct_positions.append(answer[index])
+        else:
+            correct_positions.append(user_guess_positions[index])
+
+    return correct_positions
+
 
 def main():
     chances = 6
@@ -65,7 +75,8 @@ def main():
         if guess == answer:
             break
         positions = check_user_guess(guess, answer)
-        print(positions)
+        correct_positions = get_correct_positions(positions, answer)
+        print(correct_positions)
         remove_grey_letters(valid_letters, guess, positions)
     
     if chances == 0:
