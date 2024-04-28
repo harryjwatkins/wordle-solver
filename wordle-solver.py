@@ -62,8 +62,7 @@ def get_correct_positions(user_guess_positions, answer):
 
     return correct_positions
 
-
-def main():
+def game_loop():
     chances = 6
     words = get_word_list()
     answer = pick_word(words)
@@ -83,6 +82,14 @@ def main():
         print("Sorry you failed to guess the word")
     else:
         print("You guessed the word!")
+
+def main():
+    game_loop()
+    while True:
+        replay = input("Would you like to play again? Y/N")
+        if replay == 'N':
+            break
+        game_loop()
 
 if __name__ == '__main__':
     main()
