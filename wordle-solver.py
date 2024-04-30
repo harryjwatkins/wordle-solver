@@ -29,10 +29,10 @@ def get_user_guess(list_of_valid_words, valid_letters):
         if user_input in list_of_valid_words:
             user_letters = get_letters_in_word(user_input)
             check = all(letter in valid_letters for letter in user_letters)
-            if not check: 
-                print("Your guess has letters that cannot be used")
-                continue
-            break
+            if check: 
+                break
+            
+            print("Your guess has letters that cannot be used")
         
         print("Not a valid guess")
     return user_input
@@ -66,10 +66,9 @@ def game_loop():
     chances = 6
     words = get_word_list()
     answer = pick_word(words)
-    valid_letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+    valid_letters = list(map(chr, range(ord('a'), ord('z')+1)))
     while chances > 0:
-        print("Valid letters remaining:")
-        print(valid_letters)
+        print("Valid letters remaining:\n", valid_letters)
         guess = get_user_guess(words, valid_letters)
         if guess == answer:
             break
