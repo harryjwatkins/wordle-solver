@@ -1,5 +1,12 @@
 import random
 
+def get_length_of_word_choice():
+    while True:
+        word_length_choice = input("Hi, what length of word would you like to play with")
+        if word_length_choice > 0:
+            return word_length_choice
+        print("Not a valid choice for word length")
+
 def get_word_list():
     word_list = []
     with open("words.txt", "r") as words:
