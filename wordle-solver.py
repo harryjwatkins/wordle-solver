@@ -15,8 +15,7 @@ def get_word_list():
     return word_list
 
 def pick_word(list_of_words):
-    random_index = random.randint(0, len(list_of_words))
-    return list_of_words[random_index]
+    return list_of_words[random.randint(0, len(list_of_words))]
 
 def count_frequency_letters(word):
     counter = {}
@@ -24,17 +23,11 @@ def count_frequency_letters(word):
         counter[x] = counter.get(x, 0) + 1
     return counter
 
-def get_letters_in_word(word):
-    result = set()
-    for x in word:
-        result.add(x)
-    return result
-
 def get_user_guess(list_of_valid_words, valid_letters):
     while True:
         user_input = input("Please type your guess \n")
         if user_input in list_of_valid_words:
-            user_letters = get_letters_in_word(user_input)
+            user_letters = set(user_input)
             check = all(letter in valid_letters for letter in user_letters)
             if check: 
                 break
@@ -46,7 +39,7 @@ def get_user_guess(list_of_valid_words, valid_letters):
 
 def check_user_guess(user_guess, answer):
     positions = [0] * len(answer)
-    answer_letters = get_letters_in_word(answer)
+    answer_letters = set(answer)
     for index in range(len(answer)):
         if user_guess[index] == answer[index]:
             positions[index] = 2
