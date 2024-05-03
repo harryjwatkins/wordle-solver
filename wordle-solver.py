@@ -7,11 +7,12 @@ def get_length_of_word_choice():
             return word_length_choice
         print("Not a valid choice for word length")
 
-def get_word_list():
+def get_word_list(length_of_word):
     word_list = []
     with open("words.txt", "r") as words:
         for word in words:
-            word_list.append(word.strip())
+            if len(word) == length_of_word:
+                word_list.append(word.strip())
     return word_list
 
 def pick_word(list_of_words):
@@ -64,7 +65,8 @@ def get_correct_positions(user_guess_positions, answer):
 
 def game_loop():
     chances = 6
-    words = get_word_list()
+    length_of_word_choice = get_length_of_word_choice()
+    words = get_word_list(length_of_word_choice)
     answer = pick_word(words)
     valid_letters = list(map(chr, range(ord('a'), ord('z')+1)))
     while chances > 0:
@@ -93,6 +95,7 @@ def main():
             game_loop()
         else:
             print("Your choice was not valid")
+    
 
 if __name__ == '__main__':
     main()
