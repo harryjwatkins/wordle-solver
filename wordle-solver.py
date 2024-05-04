@@ -2,17 +2,19 @@ import random
 
 def get_length_of_word_choice():
     while True:
-        word_length_choice = input("Hi, what length of word would you like to play with")
-        if word_length_choice > 0:
-            return word_length_choice
+        word_length_choice = input("Hi, what length of word would you like to play with:\n")
+        if int(word_length_choice) > 0:
+            return int(word_length_choice)
         print("Not a valid choice for word length")
 
 def get_word_list(length_of_word):
     word_list = []
     with open("words.txt", "r") as words:
         for word in words:
+            word = word.strip()
             if len(word) == length_of_word:
                 word_list.append(word.strip())
+    print(word_list[0])
     return word_list
 
 def pick_word(list_of_words):
