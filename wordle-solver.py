@@ -12,9 +12,8 @@ def get_word_list(length_of_word):
     with open("words.txt", "r") as words:
         for word in words:
             word = word.strip()
-            if len(word) == length_of_word:
+            if len(word) == length_of_word and word.islower():
                 word_list.append(word.strip())
-    print(word_list[0])
     return word_list
 
 def pick_word(list_of_words):
