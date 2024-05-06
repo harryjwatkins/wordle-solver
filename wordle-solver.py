@@ -64,12 +64,17 @@ def get_correct_positions(user_guess_positions, answer):
 
     return correct_positions
 
+def display_past_positions(past_positions):
+    for position in past_positions:
+        print(position)
+
 def game_loop():
     chances = 6
     length_of_word_choice = get_length_of_word_choice()
     words = get_word_list(length_of_word_choice)
     answer = pick_word(words)
     valid_letters = list(map(chr, range(ord('a'), ord('z')+1)))
+    past_positions = []
     while chances > 0:
         print("Valid letters remaining:\n", valid_letters)
         guess = get_user_guess(words, valid_letters)
@@ -77,7 +82,8 @@ def game_loop():
             break
         positions = check_user_guess(guess, answer)
         correct_positions = get_correct_positions(positions, answer)
-        print(correct_positions)
+        past_positions.append(correct_positions)
+        display_past_positions(past_positions)
         remove_grey_letters(valid_letters, guess, positions)
     
     if chances == 0:
