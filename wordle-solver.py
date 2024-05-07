@@ -2,10 +2,15 @@ import random
 
 def get_length_of_word_choice():
     while True:
-        word_length_choice = input("Hi, what length of word would you like to play with:\n")
-        if int(word_length_choice) > 0:
-            return int(word_length_choice)
-        print("Not a valid choice for word length")
+        try:
+            word_length_choice = input("What length of word would you like to play with:\n")
+            word_length = int(word_length_choice)
+            if word_length > 0:
+                return word_length
+            else:
+                raise Exception()
+        except:
+            print("Not a valid choice for word length")
 
 def get_word_list(length_of_word):
     word_list = []
@@ -92,6 +97,7 @@ def game_loop():
         print("You guessed the word!")
 
 def main():
+    print("Hi, welcome!")
     game_loop()
     while True:
         replay = input("Would you like to play again? Y/N \n")
