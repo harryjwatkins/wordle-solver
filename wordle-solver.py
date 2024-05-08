@@ -55,9 +55,11 @@ def check_user_guess(user_guess, answer):
     return positions
 
 def remove_grey_letters(letters, user_guess, user_guess_positions):
+    already_removed = set()
     for index in range(len(user_guess_positions)):
-        if user_guess_positions[index] == 0:
+        if user_guess_positions[index] == 0 and user_guess[index] not in already_removed:
             letters.remove(user_guess[index])
+            already_removed.add(user_guess[index])
 
 def get_correct_positions(user_guess_positions, answer):
     correct_positions = []
