@@ -102,13 +102,16 @@ def main():
     print("Hi, welcome!")
     game_loop()
     while True:
-        replay = input("Would you like to play again? Y/N \n")
-        if replay.capitalize() == 'N':
-            print("Thanks for playing!")
-            break
-        elif replay.capitalize() == 'Y': 
-            game_loop()
-        else:
+        try:
+            replay = input("Would you like to play again? Y/N \n").capitalize()
+            if replay == 'N':
+                print("Thanks for playing!")
+                break
+            elif replay == 'Y': 
+                game_loop()
+            else:
+                raise Exception()
+        except:
             print("Your choice was not valid")
     
 
