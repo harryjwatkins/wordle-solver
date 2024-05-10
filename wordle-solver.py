@@ -37,12 +37,11 @@ def get_user_guess(list_of_valid_words, valid_letters):
             user_letters = set(user_input)
             check = all(letter in valid_letters for letter in user_letters)
             if check: 
-                break
+                return user_input
             
             print("Your guess has letters that cannot be used")
         
         print("Not a valid guess")
-    return user_input
 
 def check_user_guess(user_guess, answer):
     positions = [0] * len(answer)
